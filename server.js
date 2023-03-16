@@ -1,8 +1,15 @@
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
+const cors = require("cors");
 
-const app = require("./app")
+const app = require("./app");
+
+app.use(
+  cors({
+    origin: ["https://comic-book-manager.onrender.com"],
+  })
+);
 
 const DB = process.env.DATABASE.replace(
   "<PASSWORD>",
@@ -26,12 +33,3 @@ mongoose
   .catch((error) => {
     console.log(error);
   });
-
-
-
-// MIDDLEWARE (my own middleware)
-// app.use((req, res, next) => {
-//   console.log("Hello from the middleware... 👋");
-//   next();
-// });
-
